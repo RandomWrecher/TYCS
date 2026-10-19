@@ -9,6 +9,16 @@
 (define (identity x) x)
 (define (inc x) (+ x 1))
 
+; Now defining an iterative process
+(define (accum-iter combiner null-value term a next b)
+    (define (iter a result)
+        (if (> a b)
+            result
+            (iter (next a) (combiner (term a) result))))
+    (iter a null-value))
+(define (identity x) x)
+(define (inc x) (+ x 1))
+
 ; Test cases, both are working as they should!
 (accumulate + 0 identity 0 inc 5)
 (accumulate * 1 identity 1 inc 5)
